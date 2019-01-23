@@ -22,6 +22,7 @@ function popsicles() {
     return this.popsiciles;
 }
 
+// returns defined since this is the window function scope. 
 console.log(popsicles());
 
 // Principle 2
@@ -30,12 +31,15 @@ console.log(popsicles());
 
 var iceCreamTruck = {
     popsiciles: 300,
-    pop: function(){
+    say(){
         return this.popsiciles;
     } 
 };
 
-console.log(iceCreamTruck.pop);
+// since your function is referencing the object scope, it will return popsicle
+console.log(iceCreamTruck.say());
+
+
 
 // Principle 3
 
@@ -56,13 +60,14 @@ console.log(pop.taste);
 // code example for Explicit Binding
 
 function PopsicleMaker() {
-    console.log("I like " + this.flavor);
+    console.log("I like " + this.flavor + " and " + this.food);
 }
 
 var strawberry = {
-    flavor: "Cereal"
+    flavor: "strawberry",
+    food: "chocoloate cake"
 }
 
 // substituting one object for another one
 PopsicleMaker.call(strawberry);
-console.log(PopsicleMaker());
+
