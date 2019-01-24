@@ -39,7 +39,7 @@ function CharacterStats(healthPoints, name, gameObjAttributes) {
   this.name = name; 
 }
 
-Character.prototype.takeDamage = function(a_gameobject) {
+CharacterStats.prototype.takeDamage = function(a_gameobject) {
   return a_gameobject.Destroy(); 
 }
 
@@ -60,8 +60,8 @@ function Humanoid(team, weapons, language, characterStatsAttributes) {
   this.language = language;
 }
 
-Humanoid.prototype.greet = function(obj) {
-  return obj + " offers a greeting in " + this.language;
+Humanoid.prototype.greet = function() {
+  return CharacterStats.name + " offers a greeting in " + this.language;
 }
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
