@@ -16,14 +16,14 @@
   * 
 */
 
-function GameObject(createdAt, dimensions) {
-  this.createdAt = createdAt;
-  this.dimensions = dimensions;
+function GameObject(attrs) {
+  this.createdAt = attrs.createdAt;
+  this.dimensions = attrs.dimensions;
 }
 
-GameObject.prototype.Destroy = function() {
+GameObject.prototype.destroy = function() {
   return "Object was removed from the game.";
-}
+};
 /*
   === CharacterStats ===
   * healthPoints
@@ -32,16 +32,19 @@ GameObject.prototype.Destroy = function() {
   * should inherit destroy() from GameObject's prototype
 */
 
-function CharacterStats(healthPoints, name, gameObjAttributes) {
-  GameObject.call(this, gameObjAttributes);
+function CharacterStats(CharacterData) {
+  GameObject.call(this, CharacterData);
 
-  this.healthPoints = healthPoints;
-  this.name = name; 
+  this.healthPoints = CharacterData.healthPoints;
+  this.name = CharacterData.name;
 }
+
+CharacterStats.prototype = Object.create(GameObject.prototype);
 
 CharacterStats.prototype.takeDamage = function() {
-  return GameObject.Destroy(); 
-}
+  return this.name + " took damage."; 
+};
+
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -53,24 +56,25 @@ CharacterStats.prototype.takeDamage = function() {
   * should inherit takeDamage() from CharacterStats
 */
  
-function Humanoid(team, weapons, language, characterStatsAttributes) {
-  CharacterStats.call(this, characterStatsAttributes);
-  this.team = team;
-  this.weapons = weapons;
-  this.language = language;
+function Humanoid(HumanoidStats) {
+  CharacterStats.call(this, HumanoidStats); //?
+  this.team = HumanoidStats.team;
+  this.weapons = HumanoidStats.weapons;
+  this.language = HumanoidStats.language; 
 }
+Humanoid.prototype = Object.create(CharacterStats.prototype);
 
 Humanoid.prototype.greet = function() {
-  return CharacterStats.name + " offers a greeting in " + this.language;
-}
+  return this.name + " offers a greeting in " + this.language; //? 
+};
+
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
   * Instances of CharacterStats should have all of the same properties as GameObject.
 */
 
-CharacterStats.prototype = Object.create(GameObject.prototype);
-Humanoid.prototype = Object.create(CharacterStats.prototype);
+
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
