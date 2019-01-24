@@ -39,8 +39,8 @@ function CharacterStats(healthPoints, name, gameObjAttributes) {
   this.name = name; 
 }
 
-CharacterStats.prototype.takeDamage = function(a_gameobject) {
-  return a_gameobject.Destroy(); 
+CharacterStats.prototype.takeDamage = function() {
+  return GameObject.Destroy(); 
 }
 
 /*
