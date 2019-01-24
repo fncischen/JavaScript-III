@@ -161,6 +161,9 @@ Humanoid.prototype.greet = function() {
     this.money = HeroStats.money;
   }
 
+  Villian.prototype = Object.create(Humanoid.prototype);
+  Hero.prototype = Object.create(Humanoid.prototype);
+
 Humanoid.prototype.stab = function(target, amount) {
   target.healthPoints = target.healthPoints - amount;
   if (target.healthPoints == 0) {
@@ -171,3 +174,4 @@ Humanoid.prototype.stab = function(target, amount) {
   }
 }
 
+const mainHero = new 
