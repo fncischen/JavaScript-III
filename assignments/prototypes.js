@@ -145,3 +145,29 @@ Humanoid.prototype.greet = function() {
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+  function Villian(VillainStats) {
+    Humanoid.call(this,VillainStats);
+
+    this.job = VillianStats.job;
+    this.money = VillianStats.money;
+
+  }
+
+  function Hero(HeroStats) {
+    Humanoid.call(this, HeroStats);
+
+    this.job = HeroStats.job;
+    this.money = HeroStats.money;
+  }
+
+Humanoid.prototype.stab = function(target, amount) {
+  target.healthPoints = target.healthPoints - amount;
+  if (target.healthPoints == 0) {
+    target.destroy();
+  }
+  else {
+    return `We've removed ${amount} of healthpoints from ${target.name}, leaving ${target.name} only ${target.healthPoints} left.`;
+  }
+}
+
